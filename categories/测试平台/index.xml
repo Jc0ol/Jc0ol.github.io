@@ -13,7 +13,7 @@
         <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>https://jc0ol.github.io/p/test-chinese/</guid>
-        <description>&lt;img src="https://jc0ol.github.io/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post 接口测试平台设计" /&gt;&lt;h1 id=&#34;项目概述&#34;&gt;项目概述
+        <description>&lt;h1 id=&#34;项目概述&#34;&gt;项目概述
 &lt;/h1&gt;&lt;p&gt;本项目是一款基于微服务架构的企业级接口测试平台，致力于提供全链路API测试解决方案。平台支持HTTP/HTTPS、WebSocket等多协议测试，集成自动化用例生成、定时任务调度、分布式执行、智能断言等核心能力，具备高可用、高扩展、易维护的特性&lt;/p&gt;
 &lt;h1 id=&#34;技术架构设计&#34;&gt;技术架构设计
 &lt;/h1&gt;&lt;h2 id=&#34;整体架构&#34;&gt;整体架构
