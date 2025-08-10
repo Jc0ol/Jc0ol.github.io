@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这是一个副标题">
-<title>Chinese Test</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="接口测试平台博客">
+<title>接口测试平台设计</title>
 
 <link rel='canonical' href='https://jc0ol.github.io/p/test-chinese/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Chinese Test">
-<meta property='og:description' content="这是一个副标题">
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="接口测试平台设计">
+<meta property='og:description' content="接口测试平台博客">
 <meta property='og:url' content='https://jc0ol.github.io/p/test-chinese/'>
 <meta property='og:site_name' content='演示站点'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2020-09-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2020-09-09T00:00:00&#43;00:00'/><meta property='og:image' content='https://jc0ol.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
-<meta name="twitter:title" content="Chinese Test">
-<meta name="twitter:description" content="这是一个副标题"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://jc0ol.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-02T00:00:00&#43;00:00'/><meta property='og:image' content='https://jc0ol.github.io/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
+<meta name="twitter:title" content="接口测试平台设计">
+<meta name="twitter:description" content="接口测试平台博客"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jc0ol.github.io/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
     </head>
     <body class="
     article-page
@@ -266,9 +266,58 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#正文测试">正文测试</a></li>
-    <li><a href="#引用">引用</a></li>
-    <li><a href="#图片">图片</a></li>
+    <li><a href="#整体架构">整体架构</a></li>
+    <li><a href="#微服务架构">微服务架构</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#组织-项目-用户体系">组织-项目-用户体系</a></li>
+    <li><a href="#多协议支持"><strong>多协议支持</strong></a></li>
+    <li><a href="#测试用例"><strong>测试用例****管理</strong></a>
+      <ol>
+        <li><a href="#项目分组与用例类型"><strong>项目分组与用例类型</strong></a></li>
+        <li><a href="#测试用例执行与编辑的正确性">测试用例执行与编辑的正确性</a></li>
+        <li><a href="#测试用例的独立性">测试用例的独立性</a></li>
+      </ol>
+    </li>
+    <li><a href="#执行引擎">执行引擎</a>
+      <ol>
+        <li><a href="#架构设计">架构设计</a>
+          <ol>
+            <li><a href="#模块职责">模块职责</a></li>
+            <li><a href="#设计思想">设计思想</a></li>
+          </ol>
+        </li>
+        <li><a href="#测试用例执行">测试用例执行</a></li>
+        <li><a href="#测试节点监控">测试节点监控</a></li>
+        <li><a href="#测试用例执行中不允许编辑">测试用例执行中不允许编辑</a></li>
+      </ol>
+    </li>
+    <li><a href="#通知模块"><strong>通知模块</strong></a></li>
+    <li><a href="#插件生态">插件生态</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#登录">登录</a></li>
+    <li><a href="#注册">注册</a></li>
+    <li><a href="#商品搜索">商品搜索</a></li>
+    <li><a href="#购物车">购物车</a>
+      <ol>
+        <li><a href="#添加单个商品">添加单个商品</a></li>
+        <li><a href="#添加多个商品">添加多个商品</a></li>
+        <li><a href="#分批次添加商品补充">分批次添加商品——补充</a></li>
+      </ol>
+    </li>
+    <li><a href="#订单相关">订单相关</a>
+      <ol>
+        <li><a href="#创建订单">创建订单</a></li>
+        <li><a href="#查询余额">查询余额</a></li>
+        <li><a href="#订单查询">订单查询</a></li>
+        <li><a href="#订单支付">订单支付</a></li>
+        <li><a href="#订单取消">订单取消</a></li>
+      </ol>
+    </li>
+    <li><a href="#测试">测试</a></li>
   </ol>
 </nav>
         </div>
@@ -284,12 +333,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/test-chinese/">
-                <img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_e5aaa5f0b7bd07e9.jpg"
-                        srcset="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_e5aaa5f0b7bd07e9.jpg 800w, /p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_c99ba9c80ceee4b3.jpg 1600w"
-                        width="800" 
-                        height="600" 
-                        loading="lazy"
-                        alt="Featured image of post Chinese Test" />
+                
+                    <img src="/helena-hertz-wWZzXlDpMog-unsplash.jpg" loading="lazy" alt="Featured image of post 接口测试平台设计" />
                 
             </a>
         </div>
@@ -299,12 +344,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/test/" style="background-color: #2a9d8f; color: #fff;">
-                Test
-            </a>
-        
-            <a href="/categories/%E6%B5%8B%E8%AF%95/" >
-                测试
+            <a href="/categories/%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/" >
+                测试平台
             </a>
         
     </header>
@@ -312,12 +353,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/test-chinese/">Chinese Test</a>
+            <a href="/p/test-chinese/">接口测试平台设计</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            这是一个副标题
+            接口测试平台博客
         </h3>
         
     </div>
@@ -338,7 +379,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Sep 09, 2020</time>
+                <time class="article-time--published">Aug 02, 2025</time>
             </div>
         
 
@@ -368,86 +409,475 @@
     <section class="article-content">
     
     
-    <h2 id="正文测试">正文测试
-</h2><p>而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。</p>
-<p>奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。</p>
-<h2 id="引用">引用
-</h2><blockquote>
-<p>思念是最暖的忧伤像一双翅膀<br>
-让我停不了飞不远在过往游荡<br>
-不告而别的你 就算为了我着想<br>
-这么沉痛的呵护 我怎么能翱翔</p>
-<p><em><a class="link" href="https://www.youtube.com/watch?v=3aypp_YlBzI"  target="_blank" rel="noopener"
-    >最暖的憂傷 - 田馥甄</a></em></p></blockquote>
-<h2 id="图片">图片
-</h2><p><img src="/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash.jpg"
-	width="667"
-	height="1000"
-	srcset="/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e98fca2b4272416e.jpg 480w, /p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e3d37c9ded115b12.jpg 1024w"
+    <h1 id="项目概述">项目概述
+</h1><p>本项目是一款基于微服务架构的企业级接口测试平台，致力于提供全链路API测试解决方案。平台支持HTTP/HTTPS、WebSocket等多协议测试，集成自动化用例生成、定时任务调度、分布式执行、智能断言等核心能力，具备高可用、高扩展、易维护的特性</p>
+<h1 id="技术架构设计">技术架构设计
+</h1><h2 id="整体架构">整体架构
+</h2><ul>
+<li>前端：Vue3 + Arco-Design</li>
+<li>后端：Spring Cloud Alibaba + SpringBoot + Spring Data JPA +Redis + RabbitMQ</li>
+<li>测试机：Python及其相关网络库</li>
+<li>部署：Docker Compose(中间与测试机容器化部署，简化环境一致性管理)</li>
+</ul>
+<h2 id="微服务架构">微服务架构
+</h2><ul>
+<li>dsg-api-gateway : API网关服务，统一入口和路由分发</li>
+<li>dsg-service-discovery : 基于Nacos的服务注册与发现</li>
+<li>dsg-config-server : 配置中心，集中管理配置信息</li>
+<li>dsg-auth-service : 认证授权服务，JWT令牌管理</li>
+<li>dsg-user-service : 用户管理服务</li>
+<li>dsg-organization-service : 组织架构管理</li>
+<li>dsg-project-service : 项目管理服务</li>
+<li>dsg-test-service : 测试用例管理核心服务</li>
+<li>dsg-execution-engine : 测试执行引擎调度服务</li>
+<li>dsg-report-service：测试结果存储与测试报告通知服务</li>
+<li>dsg-rbac-service：用户组织权限和项目权限的认证与存储服务</li>
+<li>dsg-plugin-service：插件管理服务</li>
+<li>dsg-websocket-service : WebSocket测试专用服务</li>
+</ul>
+<h1 id="核心功能">核心功能
+</h1><h2 id="组织-项目-用户体系">组织-项目-用户体系
+</h2><ul>
+<li>层级关系：组织包含多项目和用户，项目独立管理测试用例与插件，用户权限分组织级和项目级两层控制</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDQ1ZjQ1ZDRhODliNmFhZDJmNGMyZGU1ZGJmNjg2OTdfQ05La1lZYTk0bjJnczREaWxBZW9hdTlPemRlaHZHRklfVG9rZW46VXhSb2JMazlWb2VwZHl4SE1OQmNOZlNKbmlkXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
 	loading="lazy"
 	
-		alt="Photo by Florian Klauer on Unsplash"
+		alt="img"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="66"
-		data-flex-basis="160px"
-	
->  <img src="/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash.jpg"
-	width="1000"
-	height="667"
-	srcset="/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_e13c58d5189f892c.jpg 480w, /p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_8fc948b7ee525251.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Luca Bravo on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="149"
-		data-flex-basis="359px"
 	
 ></p>
-<p><img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg"
-	width="1000"
-	height="750"
-	srcset="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_503c0ebcc5245e10.jpg 480w, /p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_48c98de55fb3c999.jpg 1024w"
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=YzQyNjZlMmFiOGQ0NzIwZWE3YTAwYmVhNjY4MzYwODFfMmtRZGt4V2lYeGhTZ3lDR0l5YmRha2FOUTZValZyQmpfVG9rZW46VmUwMmI3cHAxb0R0aXJ4ckVBaWNPU0tubk45XzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
 	loading="lazy"
 	
-		alt="Photo by Helena Hertz on Unsplash"
+		alt="img"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="133"
-		data-flex-basis="320px"
-	
->  <img src="/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash.jpg"
-	width="667"
-	height="1000"
-	srcset="/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_f81a3588c5c4a663.jpg 480w, /p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_1c52ba2a4ad7b9a0.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Hudai Gayiran on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="66"
-		data-flex-basis="160px"
 	
 ></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">![<span class="nt">Photo by Florian Klauer on Unsplash</span>](<span class="na">florian-klauer-nptLmg6jqDo-unsplash.jpg</span>)  ![<span class="nt">Photo by Luca Bravo on Unsplash</span>](<span class="na">luca-bravo-alS7ewQ41M8-unsplash.jpg</span>) 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">![<span class="nt">Photo by Helena Hertz on Unsplash</span>](<span class="na">helena-hertz-wWZzXlDpMog-unsplash.jpg</span>)  ![<span class="nt">Photo by Hudai Gayiran on Unsplash</span>](<span class="na">hudai-gayiran-3Od_VKcDEAA-unsplash.jpg</span>)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>相册语法来自 <a class="link" href="https://typlog.com/"  target="_blank" rel="noopener"
-    >Typlog</a></p>
+<ul>
+<li>权限管理
+<ul>
+<li>组织管理员可以通过用户账号邀请用户加入，共享组织内项目资源</li>
+<li>项目级默认权限为<code>MEMBER</code>，支持自定义分配权限，实现精细化管理</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ODE5YjAwZjlkNWNhYzM2Njg2OTIwMjNiMjFhN2U3ZDJfQkJYRmpCa2hiTkl4bmpKRHNNODM5blR3Yjg2WkZGT3VfVG9rZW46TlVlbGI0SVJHb3lIa0t4UGlLMWNwRmhLbk5IXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="多协议支持"><strong>多协议支持</strong>
+</h2><ul>
+<li>基础协议：HTTP/HTTPS(覆盖GET/POST/PUT/DELETE等方法)，支持请求头、请求体、变量替换配置</li>
+<li>扩展协议：通过插件方式支持WebSocket，并可基于此框架扩展更多协议(如gRPC等协议)</li>
+<li>变量管理：支持用例级别全局变量定义，步骤中通过<code>{{argument}}</code>引用，结合JSONPath提取响应数据动态更新变量</li>
+</ul>
+<h2 id="测试用例"><strong>测试用例****管理</strong>
+</h2><h3 id="项目分组与用例类型"><strong>项目分组与用例类型</strong>
+</h3><ul>
+<li>按项目维度管理用例，支持简单用例(单接口测试)和流程用例(多接口串联，如 “登录→加购→下单”)</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NDNmYWQxZDgzNDJhNzcxZTFkN2FhYzk5ZGZhMzgzMWVfOEw3SUFLRFIzaVQ2WGYzRlB5b3pmemFwdU5nZzdFSG5fVG9rZW46TXFQNGIyRkhVb0Z6MjJ4a1lhVmN0VHE5bmdoXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<ul>
+<li>可配置项
+<ul>
+<li>项目级：环境变量</li>
+<li>用例级：全局变量、超时时间、优先级</li>
+<li>步骤级：启用状态、失败是否继续运行、请求方法、请求路径、请求头、请求参数、请求体、变量提取、断言规则、前后置脚本</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjM4N2UzMzdhMTA5NjdlMjVkNjI5ZTRiM2MwMmFmNWJfWlRGNmRkY09VYzNyczhDbXoySHM5aU44ZjlMczlqbWdfVG9rZW46SU4zZmJNTUtUb3pqY1R4bTZaUWNRT2hhbnBkXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<blockquote>
+<p>支持状态码、响应时间、JSONPath等多类型断言，支持启用或者禁用断言配置</p></blockquote>
+<h3 id="测试用例执行与编辑的正确性">测试用例执行与编辑的正确性
+</h3><ul>
+<li>用例编辑时自动加锁，其他用户无法同时编辑或执行，避免并发修改导致的用例错乱</li>
+<li>锁状态实时同步(前端显示&quot;编辑中&quot;)</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NjkwYjk4YmJiZTA0YTA0MzE4NTAyZDUwNmRjZTc2MzJfWVBTbVJhcGg3TmNFcG15d3VOZXlzNTc3MGlPMW9udjlfVG9rZW46RWpYTWJ6em9qb1FlY3h4RGZvOGNyb2VTbkdmXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="测试用例的独立性">测试用例的独立性
+</h3><ul>
+<li>效率：测试机主线程汇总结果，子线程并行执行测试用例，提升执行效率</li>
+<li>稳定性：
+<ul>
+<li>测试用例之间互不干扰，前置步骤报错会依据选项决定是否跳过后续步骤的执行，避免批量无效报错</li>
+<li>支持步骤级禁用</li>
+<li><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=YTUwZjIyZjE3YjIyNWQxNGExZDUyNWIzOTdiZTU5YTBfNGVCaE0xSzRvcjVZTGVMRHc0NUVpMk5PSktjRjhFcjBfVG9rZW46VEhLMGJYOVVqbzZ0VlJ4ZG80c2NjSHNNbk9oXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></li>
+</ul>
+</li>
+<li>灵活性：
+<ul>
+<li>用例增删改独立，无需关联其他用例</li>
+<li>支持用例复制扩展(复用前置步骤)，减少编写工作量</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ODEzYTBmZWI2NzE5N2M0N2Y5YzUxYzc4OGRiZWY4NzdfWXIycnRIc0liM1liaEZsd3lZUjJOcUNSVnJrdWZBbEdfVG9rZW46Sks2dGJUWFZMb2lxdzN4aE5XZWNaVmoxbm5nXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="执行引擎">执行引擎
+</h2><h3 id="架构设计">架构设计
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=YTg3N2VjNmJkMDQ5NGRkZDNhYTBmM2M5ZDg4ZTE0NzNfck5BaFNvcFJVbHoxTXYydER6NmJzRml6Y2pOQVBzV1BfVG9rZW46RUt3V2J1dTlOb1M4WXd4OHp0M2NrZTg5blZjXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<ul>
+<li>采用&quot;单一职责原则&quot;，添加新的协议测试需求代码改动小</li>
+<li>通过RabbitMQ实现异步执行，解耦执行模块和测试机，支持消息重试</li>
+<li>覆盖&quot;任务发起-执行-结果聚合&quot;的完整流程</li>
+</ul>
+<h4 id="模块职责">模块职责
+</h4><ul>
+<li>execution-engine：任务执行引擎，负责任务调度和分发</li>
+<li>测试机集群：实际执行测试用例的节点</li>
+<li>report-service：报告服务，负责测试结果收集和报告生成</li>
+<li>plugin-service：根据插件的开关来扩展微服务</li>
+</ul>
+<h4 id="设计思想">设计思想
+</h4><ul>
+<li>执行模块的缓存用于缓存正在执行的测试任务和节点负载，实现了基于节点负载的权重分配算法和节点故障的二次任务分发，避免测试机宕机导致的任务丢失</li>
+<li>任务队列命名统一为协议+nodeid，保证任务分发的正确性，也为后续扩展其他协议提供了统一标准</li>
+<li>健康队列用于测试机状态上报，保证执行模块可以正确监控节点状态</li>
+<li>报告模块的缓存用于缓存正在执行的测试任务和从测试机节点的执行反馈，待所有测试用例执行完成后存储到数据库，实现了分布式节点的报告聚合和测试结果的存储</li>
+<li>报告反馈队列用于报告聚合之后、报告发送之前，通知执行模块任务完成，执行模块删除缓存的测试任务</li>
+<li>测试平台操作主库进行测试用例的增删改，测试机读取从库获取测试用例
+<ul>
+<li>构造任务时发送每个测试用例的更新时间，通过测试用例的更新时间验证从库数据是否为最新版本，确保测试执行时数据准确性</li>
+<li>当测试用例处于执行状态，不允许编辑该测试用例，进一步保证测试执行时数据的准确性</li>
+</ul>
+</li>
+</ul>
+<h3 id="测试用例执行">测试用例执行
+</h3><ul>
+<li>触发方式：单点执行、批量执行、定时任务(一次性/Cron周期)</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NGY0NGY3NWY4ZmRhMzdiZDMwZDU3ODNiNjFlOWUyMmNfTG9UbTRwem5FR1RJeUYxd0gzRGhZUnppM2VDRlZUemJfVG9rZW46TUROYmI5eldhb1Z3MkV4MjdKRGNDdkpKbkhjXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<ul>
+<li>定时任务：基于Quartz实现，支持动态扩展调度器(任务量增加时自动扩容)，确保并发任务稳定运行</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTA2NmM5ZjYzYTg2M2E2NGM3NTJiZDY0YmNlMTI1ZGZfRVpKWVdycnJHYlYxV09ydjd5ZXFiWGlCNXZ3T3g5VjlfVG9rZW46UHRRSGJ3blBGb2JTRTl4UjEwWWNOZkU0bkpnXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NDI0Y2YxMzliNDlmYTJiMDk1ODY3N2MzZDZjMGVkNGRfdXE0bDNTSDlJSThSWkpMR0NZRUNDR0NuaXBEQ3d0RVZfVG9rZW46UE11d2J2VElwb2MyeHp4VGd2TmNwOUExblJoXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="测试节点监控">测试节点监控
+</h3><ul>
+<li></li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=OGI1NWMxOWNjYWM3ZDgxMTI2YzdhZTk3MGVjNjIxZjFfUW5ybFN3SXFTMk5peTBUbU5yc1plODMzakhJTm5QbERfVG9rZW46SzhDRGJtREpjb0IyVmp4ckQ1YmNCUlF3bkZoXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="测试用例执行中不允许编辑">测试用例执行中不允许编辑
+</h3><p>测试机会校验任务的更新时间与数据库的是否一致，不一致代表从数据库数据还未更新</p>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2MzOTU4NTI3NjgwOWViY2Q5YWY1M2ZmNjRiZWI0YTBfZWdBWWRDVUFNN1NsQ3lVZmdvbVZDblNyYzVnUmhGSEpfVG9rZW46SktZaWJOamw3bzI5a0F4TGhIRWNwMzg5bm5lXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="通知模块"><strong>通知模块</strong>
+</h2><ul>
+<li>通知方式：支持邮件、飞书通知(可配置触发条件)，可多选发送</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NTY3MTdiNzAyY2E2ZjIwODJjMmQ1YjI1MDEzNGJlOTZfNzc3alhJSFN5VWx5a1ZtOW9mWUVVNVlDVG1DN0hhYk5fVG9rZW46SnJNOWJzRGVhb0VmU254VFFxaGNGWHN1bk5oXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<ul>
+<li>报告形式：默认文本报告，开启Allure插件后生成可视化报告</li>
+<li>策略保障：通过缓存通知配置+结果校验，确保通知不重复、不遗漏</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ODRkMmVjNTVjZGEzMjAxNTg2MmFjMWEzYTk3ZGNkOWVfYzhHaUI1a1BOcXVlSVNQV2RZcFNTZ1RNUUNBQ3BobklfVG9rZW46RnB4amJWVzBhbzVUQ1B4c2FSc2Nabm9Gbm1kXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=MTg0YTNjYjhhYTAwY2RjOWYxZDk2YzJhMWZkM2RkNmZfUE1lZnpmVnVmWjgxeHhBcWxLZXBrMnROd3EyaVAyZ21fVG9rZW46VjllYmJrZEYwb0ljN254S0N3OWN2R2xlbnlkXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="插件生态">插件生态
+</h2><p>采用插件化设计扩展平台能力，支持按需启用</p>
+<ul>
+<li>Allure报告：生成可视化报告替代纯文本报告</li>
+<li>Pytest用例导出：将平台用例转换为可直接执行的Pytest脚本(含yaml数据文件、工具类)</li>
+</ul>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NTg0MGY0NDgwNWQ1MjM1MjI0NmI5MGJiYzg4ZTM1NGZfMzBmWk1ZeElGOGRZOGFBS1BTWmwyNjU4TEdoWEFqRGxfVG9rZW46UU9pMGI5bjhBb1hsM3l4M3ZxUmNLM0tmbjBjXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<ul>
+<li>WebSocket测试：支持WebSocket测试，复用现有执行/通知体系，无需修改核心模块</li>
+</ul>
+<h1 id="使用接口测试平台测试">使用接口测试平台测试
+</h1><p>为验证平台有效性，基于 Flask 开发简易商城服务（含登录、商品、购物车、订单功能），设计 55 个测试用例（含正常流程 + 异常场景，如无效 JSON、错误请求方法等），通过平台执行验证</p>
+<h2 id="登录">登录
+</h2><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=OTcyNDUwNGZkYjc0YTg1ZmZhMGE4Y2QxYjFiODIyMjhfZFI2dE1SUHh3OUxkQ1ZmUmNEaWV3TFlRSVlMcmZzWkVfVG9rZW46TTZZMGJaMTU3b2Y0Sll4RFo5a2NtTURSbmZnXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="注册">注册
+</h2><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=MmNhZWMwNGNiNmQyZjIzMzlhZGQwMjE3YThjMmFhNTBfeUd1QlFnUmdKU0tWZ2pjU3k0MTViNmtrMVBMTG90Y3ZfVG9rZW46SmpCbWI1c3k3b1F3SzZ4VFo4TWNhaFhDbjJiXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="商品搜索">商品搜索
+</h2><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NjdmMGMxZjM4YjY0Y2JjOGEzMzU2YjI1NGM5NzFjMTRfeE9hS2FoUWJxMVlsNXFmUWNoUkxmVlFidWhIaHBWVFZfVG9rZW46Q2lCa2J1RjRob1RMRm54QU1uOWNXQVVlblNLXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="购物车">购物车
+</h2><h3 id="添加单个商品">添加单个商品
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NWNiMTNiZDVlZDgxMTA2YTRmOTUxMzkxMDllYTYwN2VfQ1BubkR0ZTVJYk45MjU0VE5Ub0FzTnM0MEhyVEpISmxfVG9rZW46RFVuMGJlRGNRb1piV1V4QjZOTmNLUzdmbjZmXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="添加多个商品">添加多个商品
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ODY2Nzc4Y2UwNTYzNDgzMzYxODEyOTQwN2I1NzZhYzFfU0doaGkwbTZ2cGNKenVMMDEzNDdXS3NHRWw2M0p3a2xfVG9rZW46QXN4OWJTSEZFb1dRV0J4NndIemNrbk0xbkVmXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="分批次添加商品补充">分批次添加商品——补充
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=MmQ2ZjAyNTc5NGM2NGRlNzM3MTUwZWJiNDhiMjA2ZWVfcGlLQkFyVEV4MVZicnU1aWhSOWNjUHlYWEhYVHliTTRfVG9rZW46RzFZQmJVckIzb1piWWt4U2NVS2M1ZGp1bmNjXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="订单相关">订单相关
+</h2><h3 id="创建订单">创建订单
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=OWZiZGRjMjQ3NzI3YTE2OGI5ZGVmYWI2ODVhZmY2MjRfYXNMY3JSR3o4UWZGYlE1bzRVbkVyZ0dublI0RHdTWTJfVG9rZW46SEt6c2JYNDNHb1ZDRzJ4ZzBVemNaWGZIbkpnXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="查询余额">查询余额
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=OWRlYjA5YmU2OGMxZjllODY3OTkzODJmNmMwYjRkODVfOXl4ZVd2akw5WXByU2gyZDcyNnpPdEVvMG44YnpRTnVfVG9rZW46R1V6S2JwQjY4b2VGNmN4dXREMmM5VERJbk1iXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="订单查询">订单查询
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=MWM0YmMzYmZhNzQ1YmVkODlhNjBlY2Y2NmEwMDNhZTZfNjZUUG1BSUdNOEZLa201aVdvcXV6ZldKNEpWdDZjRkJfVG9rZW46RTZEOWJwc2VKb0p4SE14NURIMGNFaXpqbmVmXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="订单支付">订单支付
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=NzAyNjI0NGI1NDk2MjQ1YTE4NzgyZjk5NWNkZGUyMDNfM2Q3aFhEbndPM090WkZiSk9TY3ducFlMRjNaSmtHU3FfVG9rZW46Qzk3NmI2bTJIb2tSTjh4OGFnY2N5OVlBblRjXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="订单取消">订单取消
+</h3><p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=MzJmNjc3YjI0M2NmZDE2YjYzMmM1YzcwMjEyODMxNjZfQUxsaFlEZm0wbGlpNWdYZ0MyWWNCVnRYRW9WaE5TVW9fVG9rZW46S0NIUWJReG9Gb0lQNWR4UEg3eWNNbFd1bk14XzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h2 id="测试">测试
+</h2><p>上述测试用例+异常测试用例(访问不存在的方法、错误请求方法、无效的JSON格式等)录入至接口测试平台，共计55个</p>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=MzJjZDM4NmYzYjI3YWMyMjRiYWY2NjhjNzYzZGUxMTZfM0xYSDl6SldPYzRhSlVjMVRXV2lMZWVPVFVoVjUzMDlfVG9rZW46TVJmVmJ3ZmFXb29uRTV4WjZESGNOOG5MbmllXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<p>测试完成</p>
+<p><img src="https://ocnkxt5h6vz3.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTU4Mzg4ZDI4YjlkOTQ2ZjhjNjM1NWNmNTBkMzdlNDNfelB1UXdSVXZjaDZ2UTM5UkVQQ0hmU1d5U3ZuR29vekFfVG9rZW46S0lYM2JsaUhUbzZtdVp4UEtrYmNhcEFNblRmXzE3NTQ4MjE0NDk6MTc1NDgyNTA0OV9WNA"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+><a class="link" href="https://typlog.com/"  target="_blank" rel="noopener"
+    >https://typlog.com/</a>)</p>
 
 </section>
 
@@ -476,63 +906,6 @@
     
 
     
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/placeholder-text/">
-        
-        
-            <div class="article-image">
-                <img src="/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.8eae06664ddfb3e8dc6e000756cb703b_hu_cc847465c05fc251.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Placeholder Text"
-                        
-                        data-hash="md5-jq4GZk3fs&#43;jcbgAHVstwOw==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Placeholder Text</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/emoji-support/">
-        
-        
-            <div class="article-image">
-                <img src="/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.60116b1ccfc8632e9a65f7d51df3efc2_hu_c1cfd6b8275d624a.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Emoji Support"
-                        
-                        data-hash="md5-YBFrHM/IYy6aZffVHfPvwg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Emoji Support</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
 
      
     
