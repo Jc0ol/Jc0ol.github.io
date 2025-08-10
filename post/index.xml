@@ -13,7 +13,7 @@
         <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>https://jc0ol.github.io/p/test-chinese/</guid>
-        <description>&lt;h1 id=&#34;项目概述&#34;&gt;项目概述
+        <description>&lt;img src="https://jc0ol.github.io/p/test-chinese/11.jpg" alt="Featured image of post 接口测试平台设计" /&gt;&lt;h1 id=&#34;项目概述&#34;&gt;项目概述
 &lt;/h1&gt;&lt;p&gt;本项目是一款基于微服务架构的企业级接口测试平台，致力于提供全链路API测试解决方案。平台支持HTTP/HTTPS、WebSocket等多协议测试，集成自动化用例生成、定时任务调度、分布式执行、智能断言等核心能力，具备高可用、高扩展、易维护的特性&lt;/p&gt;
 &lt;h1 id=&#34;技术架构设计&#34;&gt;技术架构设计
 &lt;/h1&gt;&lt;h2 id=&#34;整体架构&#34;&gt;整体架构
@@ -82,14 +82,14 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;多协议支持&#34;&gt;&lt;strong&gt;多协议支持&lt;/strong&gt;
+&lt;h2 id=&#34;多协议支持&#34;&gt;多协议支持
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;基础协议：HTTP/HTTPS(覆盖GET/POST/PUT/DELETE等方法)，支持请求头、请求体、变量替换配置&lt;/li&gt;
 &lt;li&gt;扩展协议：通过插件方式支持WebSocket，并可基于此框架扩展更多协议(如gRPC等协议)&lt;/li&gt;
 &lt;li&gt;变量管理：支持用例级别全局变量定义，步骤中通过&lt;code&gt;{{argument}}&lt;/code&gt;引用，结合JSONPath提取响应数据动态更新变量&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;测试用例&#34;&gt;&lt;strong&gt;测试用例****管理&lt;/strong&gt;
-&lt;/h2&gt;&lt;h3 id=&#34;项目分组与用例类型&#34;&gt;&lt;strong&gt;项目分组与用例类型&lt;/strong&gt;
+&lt;h2 id=&#34;测试用例管理&#34;&gt;测试用例管理
+&lt;/h2&gt;&lt;h3 id=&#34;项目分组与用例类型&#34;&gt;项目分组与用例类型
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;按项目维度管理用例，支持简单用例(单接口测试)和流程用例(多接口串联，如 “登录→加购→下单”)&lt;/li&gt;
 &lt;/ul&gt;

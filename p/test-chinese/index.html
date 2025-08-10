@@ -10,9 +10,10 @@
 <meta property='og:description' content="接口测试平台博客">
 <meta property='og:url' content='https://jc0ol.github.io/p/test-chinese/'>
 <meta property='og:site_name' content='演示站点'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-02T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-02T00:00:00&#43;00:00'/><meta property='og:image' content='https://jc0ol.github.io/p/test-chinese/11.jpg' />
 <meta name="twitter:title" content="接口测试平台设计">
-<meta name="twitter:description" content="接口测试平台博客">
+<meta name="twitter:description" content="接口测试平台博客"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jc0ol.github.io/p/test-chinese/11.jpg' />
     </head>
     <body class="
     article-page
@@ -271,10 +272,10 @@
 
   <ol>
     <li><a href="#组织-项目-用户体系">组织-项目-用户体系</a></li>
-    <li><a href="#多协议支持"><strong>多协议支持</strong></a></li>
-    <li><a href="#测试用例"><strong>测试用例****管理</strong></a>
+    <li><a href="#多协议支持">多协议支持</a></li>
+    <li><a href="#测试用例管理">测试用例管理</a>
       <ol>
-        <li><a href="#项目分组与用例类型"><strong>项目分组与用例类型</strong></a></li>
+        <li><a href="#项目分组与用例类型">项目分组与用例类型</a></li>
         <li><a href="#测试用例执行与编辑的正确性">测试用例执行与编辑的正确性</a></li>
         <li><a href="#测试用例的独立性">测试用例的独立性</a></li>
       </ol>
@@ -328,8 +329,20 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/test-chinese/">
+                <img src="/p/test-chinese/11_hu_d49b9f6e97e4544f.jpg"
+                        srcset="/p/test-chinese/11_hu_d49b9f6e97e4544f.jpg 800w, /p/test-chinese/11_hu_d4b617a9e350f091.jpg 1600w"
+                        width="800" 
+                        height="324" 
+                        loading="lazy"
+                        alt="Featured image of post 接口测试平台设计" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -469,14 +482,14 @@
 	
 	
 ></p>
-<h2 id="多协议支持"><strong>多协议支持</strong>
+<h2 id="多协议支持">多协议支持
 </h2><ul>
 <li>基础协议：HTTP/HTTPS(覆盖GET/POST/PUT/DELETE等方法)，支持请求头、请求体、变量替换配置</li>
 <li>扩展协议：通过插件方式支持WebSocket，并可基于此框架扩展更多协议(如gRPC等协议)</li>
 <li>变量管理：支持用例级别全局变量定义，步骤中通过<code>{{argument}}</code>引用，结合JSONPath提取响应数据动态更新变量</li>
 </ul>
-<h2 id="测试用例"><strong>测试用例****管理</strong>
-</h2><h3 id="项目分组与用例类型"><strong>项目分组与用例类型</strong>
+<h2 id="测试用例管理">测试用例管理
+</h2><h3 id="项目分组与用例类型">项目分组与用例类型
 </h3><ul>
 <li>按项目维度管理用例，支持简单用例(单接口测试)和流程用例(多接口串联，如 “登录→加购→下单”)</li>
 </ul>
