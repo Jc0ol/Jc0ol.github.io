@@ -266,18 +266,24 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#整体架构">整体架构</a></li>
-    <li><a href="#微服务架构">微服务架构</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#组织-项目-用户体系">组织-项目-用户体系</a></li>
-    <li><a href="#多协议支持"><strong>多协议支持</strong></a></li>
-    <li><a href="#测试用例管理"><strong>测试用例</strong>管理</a>
+    <li><a href="#项目概述">项目概述</a></li>
+    <li><a href="#技术架构设计">技术架构设计</a>
       <ol>
-        <li><a href="#项目分组与用例类型"><strong>项目分组与用例类型</strong></a></li>
-        <li><a href="#测试用例执行与编辑的正确性">测试用例执行与编辑的正确性</a></li>
-        <li><a href="#测试用例的独立性">测试用例的独立性</a></li>
+        <li><a href="#整体架构">整体架构</a></li>
+        <li><a href="#微服务架构">微服务架构</a></li>
+      </ol>
+    </li>
+    <li><a href="#核心功能">核心功能</a>
+      <ol>
+        <li><a href="#组织-项目-用户体系">组织-项目-用户体系</a></li>
+        <li><a href="#多协议支持"><strong>多协议支持</strong></a></li>
+        <li><a href="#测试用例管理"><strong>测试用例</strong>管理</a>
+          <ol>
+            <li><a href="#项目分组与用例类型"><strong>项目分组与用例类型</strong></a></li>
+            <li><a href="#测试用例执行与编辑的正确性">测试用例执行与编辑的正确性</a></li>
+            <li><a href="#测试用例的独立性">测试用例的独立性</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
     <li><a href="#执行引擎">执行引擎</a>
@@ -295,29 +301,30 @@
     </li>
     <li><a href="#通知模块"><strong>通知模块</strong></a></li>
     <li><a href="#插件生态">插件生态</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#登录">登录</a></li>
-    <li><a href="#注册">注册</a></li>
-    <li><a href="#商品搜索">商品搜索</a></li>
-    <li><a href="#购物车">购物车</a>
+    <li><a href="#使用接口测试平台测试">使用接口测试平台测试</a>
       <ol>
-        <li><a href="#添加单个商品">添加单个商品</a></li>
-        <li><a href="#添加多个商品">添加多个商品</a></li>
-        <li><a href="#分批次添加商品补充">分批次添加商品——补充</a></li>
+        <li><a href="#登录">登录</a></li>
+        <li><a href="#注册">注册</a></li>
+        <li><a href="#商品搜索">商品搜索</a></li>
+        <li><a href="#购物车">购物车</a>
+          <ol>
+            <li><a href="#添加单个商品">添加单个商品</a></li>
+            <li><a href="#添加多个商品">添加多个商品</a></li>
+            <li><a href="#分批次添加商品补充">分批次添加商品——补充</a></li>
+          </ol>
+        </li>
+        <li><a href="#订单相关">订单相关</a>
+          <ol>
+            <li><a href="#创建订单">创建订单</a></li>
+            <li><a href="#查询余额">查询余额</a></li>
+            <li><a href="#订单查询">订单查询</a></li>
+            <li><a href="#订单支付">订单支付</a></li>
+            <li><a href="#订单取消">订单取消</a></li>
+          </ol>
+        </li>
+        <li><a href="#测试">测试</a></li>
       </ol>
     </li>
-    <li><a href="#订单相关">订单相关</a>
-      <ol>
-        <li><a href="#创建订单">创建订单</a></li>
-        <li><a href="#查询余额">查询余额</a></li>
-        <li><a href="#订单查询">订单查询</a></li>
-        <li><a href="#订单支付">订单支付</a></li>
-        <li><a href="#订单取消">订单取消</a></li>
-      </ol>
-    </li>
-    <li><a href="#测试">测试</a></li>
   </ol>
 </nav>
         </div>
@@ -413,18 +420,18 @@
     <section class="article-content">
     
     
-    <h1 id="项目概述">项目概述
-</h1><p>本项目是一款基于微服务架构的企业级接口测试平台，致力于提供全链路API测试解决方案。平台支持HTTP/HTTPS、WebSocket等多协议测试，集成自动化用例生成、定时任务调度、分布式执行、智能断言等核心能力，具备高可用、高扩展、易维护的特性</p>
-<h1 id="技术架构设计">技术架构设计
-</h1><h2 id="整体架构">整体架构
-</h2><ul>
+    <h2 id="项目概述">项目概述
+</h2><p>本项目是一款基于微服务架构的企业级接口测试平台，致力于提供全链路API测试解决方案。平台支持HTTP/HTTPS、WebSocket等多协议测试，集成自动化用例生成、定时任务调度、分布式执行、智能断言等核心能力，具备高可用、高扩展、易维护的特性</p>
+<h2 id="技术架构设计">技术架构设计
+</h2><h3 id="整体架构">整体架构
+</h3><ul>
 <li>前端：Vue3 + Arco-Design</li>
 <li>后端：Spring Cloud Alibaba + SpringBoot + Spring Data JPA +Redis + RabbitMQ</li>
 <li>测试机：Python及其相关网络库</li>
 <li>部署：Docker Compose(中间与测试机容器化部署，简化环境一致性管理)</li>
 </ul>
-<h2 id="微服务架构">微服务架构
-</h2><ul>
+<h3 id="微服务架构">微服务架构
+</h3><ul>
 <li>dsg-api-gateway : API网关服务，统一入口和路由分发</li>
 <li>dsg-service-discovery : 基于Nacos的服务注册与发现</li>
 <li>dsg-config-server : 配置中心，集中管理配置信息</li>
@@ -439,9 +446,9 @@
 <li>dsg-plugin-service：插件管理服务</li>
 <li>dsg-websocket-service : WebSocket测试专用服务</li>
 </ul>
-<h1 id="核心功能">核心功能
-</h1><h2 id="组织-项目-用户体系">组织-项目-用户体系
-</h2><ul>
+<h2 id="核心功能">核心功能
+</h2><h3 id="组织-项目-用户体系">组织-项目-用户体系
+</h3><ul>
 <li>层级关系：组织包含多项目和用户，项目独立管理测试用例与插件，用户权限分组织级和项目级两层控制 <img src="/p/test-chinese/index.zh-cn.assets/1.png"
 	width="1280"
 	height="334"
@@ -493,15 +500,15 @@
 		data-flex-basis="213px"
 	
 ></p>
-<h2 id="多协议支持"><strong>多协议支持</strong>
-</h2><ul>
+<h3 id="多协议支持"><strong>多协议支持</strong>
+</h3><ul>
 <li>基础协议：HTTP/HTTPS(覆盖GET/POST/PUT/DELETE等方法)，支持请求头、请求体、变量替换配置</li>
 <li>扩展协议：通过插件方式支持WebSocket，并可基于此框架扩展更多协议(如gRPC等协议)</li>
 <li>变量管理：支持用例级别全局变量定义，步骤中通过<code>{{argument}}</code>引用，结合JSONPath提取响应数据动态更新变量</li>
 </ul>
-<h2 id="测试用例管理"><strong>测试用例</strong>管理
-</h2><h3 id="项目分组与用例类型"><strong>项目分组与用例类型</strong>
-</h3><ul>
+<h3 id="测试用例管理"><strong>测试用例</strong>管理
+</h3><h4 id="项目分组与用例类型"><strong>项目分组与用例类型</strong>
+</h4><ul>
 <li>按项目维度管理用例，支持简单用例(单接口测试)和流程用例(多接口串联，如 “登录→加购→下单”)</li>
 </ul>
 <p><img src="/p/test-chinese/index.zh-cn.assets/4.png"
@@ -543,8 +550,8 @@
 ></p>
 <blockquote>
 <p>支持状态码、响应时间、JSONPath等多类型断言，支持启用或者禁用断言配置</p></blockquote>
-<h3 id="测试用例执行与编辑的正确性">测试用例执行与编辑的正确性
-</h3><ul>
+<h4 id="测试用例执行与编辑的正确性">测试用例执行与编辑的正确性
+</h4><ul>
 <li>用例编辑时自动加锁，其他用户无法同时编辑或执行，避免并发修改导致的用例错乱</li>
 <li>锁状态实时同步(前端显示&quot;编辑中&quot;)</li>
 </ul>
@@ -562,8 +569,8 @@
 		data-flex-basis="716px"
 	
 ></p>
-<h3 id="测试用例的独立性">测试用例的独立性
-</h3><ul>
+<h4 id="测试用例的独立性">测试用例的独立性
+</h4><ul>
 <li>效率：测试机主线程汇总结果，子线程并行执行测试用例，提升执行效率</li>
 <li>稳定性：
 <ul>
@@ -802,10 +809,10 @@
 <ul>
 <li>WebSocket测试：支持WebSocket测试，复用现有执行/通知体系，无需修改核心模块</li>
 </ul>
-<h1 id="使用接口测试平台测试">使用接口测试平台测试
-</h1><p>为验证平台有效性，基于 Flask 开发简易商城服务（含登录、商品、购物车、订单功能），设计 55 个测试用例（含正常流程 + 异常场景，如无效 JSON、错误请求方法等），通过平台执行验证</p>
-<h2 id="登录">登录
-</h2><p><img src="/p/test-chinese/index.zh-cn.assets/19.png"
+<h2 id="使用接口测试平台测试">使用接口测试平台测试
+</h2><p>为验证平台有效性，基于 Flask 开发简易商城服务（含登录、商品、购物车、订单功能），设计 55 个测试用例（含正常流程 + 异常场景，如无效 JSON、错误请求方法等），通过平台执行验证</p>
+<h3 id="登录">登录
+</h3><p><img src="/p/test-chinese/index.zh-cn.assets/19.png"
 	width="1280"
 	height="666"
 	srcset="/p/test-chinese/index.zh-cn.assets/19_hu_4f8b8030507db1f8.png 480w, /p/test-chinese/index.zh-cn.assets/19_hu_478f17eb95f25c9e.png 1024w"
@@ -819,8 +826,8 @@
 		data-flex-basis="461px"
 	
 ></p>
-<h2 id="注册">注册
-</h2><p><img src="/p/test-chinese/index.zh-cn.assets/20.png"
+<h3 id="注册">注册
+</h3><p><img src="/p/test-chinese/index.zh-cn.assets/20.png"
 	width="1280"
 	height="575"
 	srcset="/p/test-chinese/index.zh-cn.assets/20_hu_c673eeb8f620b04e.png 480w, /p/test-chinese/index.zh-cn.assets/20_hu_cf6ea79d1997b892.png 1024w"
@@ -834,8 +841,8 @@
 		data-flex-basis="534px"
 	
 ></p>
-<h2 id="商品搜索">商品搜索
-</h2><p><img src="/p/test-chinese/index.zh-cn.assets/21.png"
+<h3 id="商品搜索">商品搜索
+</h3><p><img src="/p/test-chinese/index.zh-cn.assets/21.png"
 	width="1280"
 	height="484"
 	srcset="/p/test-chinese/index.zh-cn.assets/21_hu_64ffd3e4cd6fa761.png 480w, /p/test-chinese/index.zh-cn.assets/21_hu_da3d4602a0acd43c.png 1024w"
@@ -849,9 +856,9 @@
 		data-flex-basis="634px"
 	
 ></p>
-<h2 id="购物车">购物车
-</h2><h3 id="添加单个商品">添加单个商品
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/22.png"
+<h3 id="购物车">购物车
+</h3><h4 id="添加单个商品">添加单个商品
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/22.png"
 	width="1280"
 	height="484"
 	srcset="/p/test-chinese/index.zh-cn.assets/22_hu_e3299b97357f980c.png 480w, /p/test-chinese/index.zh-cn.assets/22_hu_4c206465b70ca296.png 1024w"
@@ -865,8 +872,8 @@
 		data-flex-basis="634px"
 	
 ></p>
-<h3 id="添加多个商品">添加多个商品
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/23.png"
+<h4 id="添加多个商品">添加多个商品
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/23.png"
 	width="1280"
 	height="486"
 	srcset="/p/test-chinese/index.zh-cn.assets/23_hu_9616980f7a996058.png 480w, /p/test-chinese/index.zh-cn.assets/23_hu_b30d0aaf85587200.png 1024w"
@@ -880,8 +887,8 @@
 		data-flex-basis="632px"
 	
 ></p>
-<h3 id="分批次添加商品补充">分批次添加商品——补充
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/24.png"
+<h4 id="分批次添加商品补充">分批次添加商品——补充
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/24.png"
 	width="1280"
 	height="369"
 	srcset="/p/test-chinese/index.zh-cn.assets/24_hu_165007111fdfadb3.png 480w, /p/test-chinese/index.zh-cn.assets/24_hu_7a65d8c42145104a.png 1024w"
@@ -895,9 +902,9 @@
 		data-flex-basis="832px"
 	
 ></p>
-<h2 id="订单相关">订单相关
-</h2><h3 id="创建订单">创建订单
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/25.png"
+<h3 id="订单相关">订单相关
+</h3><h4 id="创建订单">创建订单
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/25.png"
 	width="1280"
 	height="302"
 	srcset="/p/test-chinese/index.zh-cn.assets/25_hu_8b40c4600fdf139f.png 480w, /p/test-chinese/index.zh-cn.assets/25_hu_4e7f02a05e8c5a5a.png 1024w"
@@ -911,8 +918,8 @@
 		data-flex-basis="1017px"
 	
 ></p>
-<h3 id="查询余额">查询余额
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/26.png"
+<h4 id="查询余额">查询余额
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/26.png"
 	width="1739"
 	height="165"
 	srcset="/p/test-chinese/index.zh-cn.assets/26_hu_89ee326bf96851f8.png 480w, /p/test-chinese/index.zh-cn.assets/26_hu_289ac52dadff0826.png 1024w"
@@ -926,8 +933,8 @@
 		data-flex-basis="2529px"
 	
 ></p>
-<h3 id="订单查询">订单查询
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/27.png"
+<h4 id="订单查询">订单查询
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/27.png"
 	width="1280"
 	height="488"
 	srcset="/p/test-chinese/index.zh-cn.assets/27_hu_567788412524041f.png 480w, /p/test-chinese/index.zh-cn.assets/27_hu_fc16ea4c4dd9831b.png 1024w"
@@ -941,8 +948,8 @@
 		data-flex-basis="629px"
 	
 ></p>
-<h3 id="订单支付">订单支付
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/28.png"
+<h4 id="订单支付">订单支付
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/28.png"
 	width="1280"
 	height="550"
 	srcset="/p/test-chinese/index.zh-cn.assets/28_hu_d5817eb9913ddd65.png 480w, /p/test-chinese/index.zh-cn.assets/28_hu_16bfc757b932f5b0.png 1024w"
@@ -956,8 +963,8 @@
 		data-flex-basis="558px"
 	
 ></p>
-<h3 id="订单取消">订单取消
-</h3><p><img src="/p/test-chinese/index.zh-cn.assets/29.png"
+<h4 id="订单取消">订单取消
+</h4><p><img src="/p/test-chinese/index.zh-cn.assets/29.png"
 	width="1280"
 	height="368"
 	srcset="/p/test-chinese/index.zh-cn.assets/29_hu_7496d904c690bf23.png 480w, /p/test-chinese/index.zh-cn.assets/29_hu_34352b6f5856e3b1.png 1024w"
@@ -971,8 +978,8 @@
 		data-flex-basis="834px"
 	
 ></p>
-<h2 id="测试">测试
-</h2><p>上述测试用例+异常测试用例(访问不存在的方法、错误请求方法、无效的JSON格式等)录入至接口测试平台，共计55个</p>
+<h3 id="测试">测试
+</h3><p>上述测试用例+异常测试用例(访问不存在的方法、错误请求方法、无效的JSON格式等)录入至接口测试平台，共计55个</p>
 <p><img src="/p/test-chinese/index.zh-cn.assets/30.png"
 	width="1280"
 	height="518"
