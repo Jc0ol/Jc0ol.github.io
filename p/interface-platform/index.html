@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="接口测试平台博客">
+<title>接口测试平台设计</title>
+
+<link rel='canonical' href='https://jc0ol.github.io/p/interface-platform/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="接口测试平台设计">
+<meta property='og:description' content="接口测试平台博客">
+<meta property='og:url' content='https://jc0ol.github.io/p/interface-platform/'>
+<meta property='og:site_name' content='JCool'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-02T00:00:00&#43;00:00'/><meta property='og:image' content='https://jc0ol.github.io/p/interface-platform/11.jpg' />
+<meta name="twitter:title" content="接口测试平台设计">
+<meta name="twitter:description" content="接口测试平台博客"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jc0ol.github.io/p/interface-platform/11.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/av_hu_baf35e53fcdc250d.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💻</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">JCool</a></h1>
+            <h2 class="site-description">JCool&#39;s blog</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#项目概述">项目概述</a></li>
+    <li><a href="#技术架构设计">技术架构设计</a>
+      <ol>
+        <li><a href="#整体架构">整体架构</a></li>
+        <li><a href="#微服务架构">微服务架构</a></li>
+      </ol>
+    </li>
+    <li><a href="#核心功能">核心功能</a>
+      <ol>
+        <li><a href="#组织-项目-用户体系">组织-项目-用户体系</a></li>
+        <li><a href="#多协议支持"><strong>多协议支持</strong></a></li>
+        <li><a href="#测试用例管理"><strong>测试用例</strong>管理</a>
+          <ol>
+            <li><a href="#项目分组与用例类型"><strong>项目分组与用例类型</strong></a></li>
+            <li><a href="#测试用例执行与编辑的正确性">测试用例执行与编辑的正确性</a></li>
+            <li><a href="#测试用例的独立性">测试用例的独立性</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#执行引擎">执行引擎</a>
+      <ol>
+        <li><a href="#架构设计">架构设计</a>
+          <ol>
+            <li><a href="#模块职责">模块职责</a></li>
+            <li><a href="#设计思想">设计思想</a></li>
+          </ol>
+        </li>
+        <li><a href="#测试用例执行">测试用例执行</a></li>
+        <li><a href="#测试节点监控">测试节点监控</a></li>
+        <li><a href="#测试用例执行中不允许编辑">测试用例执行中不允许编辑</a></li>
+      </ol>
+    </li>
+    <li><a href="#通知模块"><strong>通知模块</strong></a></li>
+    <li><a href="#插件生态">插件生态</a></li>
+    <li><a href="#使用接口测试平台测试">使用接口测试平台测试</a>
+      <ol>
+        <li><a href="#登录">登录</a></li>
+        <li><a href="#注册">注册</a></li>
+        <li><a href="#商品搜索">商品搜索</a></li>
+        <li><a href="#购物车">购物车</a>
+          <ol>
+            <li><a href="#添加单个商品">添加单个商品</a></li>
+            <li><a href="#添加多个商品">添加多个商品</a></li>
+            <li><a href="#分批次添加商品补充">分批次添加商品——补充</a></li>
+          </ol>
+        </li>
+        <li><a href="#订单相关">订单相关</a>
+          <ol>
+            <li><a href="#创建订单">创建订单</a></li>
+            <li><a href="#查询余额">查询余额</a></li>
+            <li><a href="#订单查询">订单查询</a></li>
+            <li><a href="#订单支付">订单支付</a></li>
+            <li><a href="#订单取消">订单取消</a></li>
+          </ol>
+        </li>
+        <li><a href="#测试">测试</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/interface-platform/">
+                <img src="/p/interface-platform/11_hu_d49b9f6e97e4544f.jpg"
+                        srcset="/p/interface-platform/11_hu_d49b9f6e97e4544f.jpg 800w, /p/interface-platform/11_hu_d4b617a9e350f091.jpg 1600w"
+                        width="800" 
+                        height="324" 
+                        loading="lazy"
+                        alt="Featured image of post 接口测试平台设计" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/" >
+                测试平台
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/interface-platform/">接口测试平台设计</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            接口测试平台博客
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="项目概述">项目概述
+</h2><p>本项目是一款基于微服务架构的企业级接口测试平台，致力于提供全链路API测试解决方案。平台支持HTTP/HTTPS、WebSocket等多协议测试，集成自动化用例生成、定时任务调度、分布式执行、智能断言等核心能力，具备高可用、高扩展、易维护的特性</p>
+<h2 id="技术架构设计">技术架构设计
+</h2><h3 id="整体架构">整体架构
+</h3><ul>
+<li>前端：Vue3 + Arco-Design</li>
+<li>后端：Spring Cloud Alibaba + SpringBoot + Spring Data JPA +Redis + RabbitMQ</li>
+<li>测试机：Python及其相关网络库</li>
+<li>部署：Docker Compose(中间与测试机容器化部署，简化环境一致性管理)</li>
+</ul>
+<h3 id="微服务架构">微服务架构
+</h3><ul>
+<li>dsg-api-gateway : API网关服务，统一入口和路由分发</li>
+<li>dsg-service-discovery : 基于Nacos的服务注册与发现</li>
+<li>dsg-config-server : 配置中心，集中管理配置信息</li>
+<li>dsg-auth-service : 认证授权服务，JWT令牌管理</li>
+<li>dsg-user-service : 用户管理服务</li>
+<li>dsg-organization-service : 组织架构管理</li>
+<li>dsg-project-service : 项目管理服务</li>
+<li>dsg-test-service : 测试用例管理核心服务</li>
+<li>dsg-execution-engine : 测试执行引擎调度服务</li>
+<li>dsg-report-service：测试结果存储与测试报告通知服务</li>
+<li>dsg-rbac-service：用户组织权限和项目权限的认证与存储服务</li>
+<li>dsg-plugin-service：插件管理服务</li>
+<li>dsg-websocket-service : WebSocket测试专用服务</li>
+</ul>
+<h2 id="核心功能">核心功能
+</h2><h3 id="组织-项目-用户体系">组织-项目-用户体系
+</h3><ul>
+<li>层级关系：组织包含多项目和用户，项目独立管理测试用例与插件，用户权限分组织级和项目级两层控制 <img src="/p/interface-platform/index.zh-cn.assets/1.png"
+	width="1280"
+	height="334"
+	srcset="/p/interface-platform/index.zh-cn.assets/1_hu_c7f9bcd1b8847bf3.png 480w, /p/interface-platform/index.zh-cn.assets/1_hu_2765493ee42f3d45.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="383"
+		data-flex-basis="919px"
+	
+></li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/2.png"
+	width="539"
+	height="276"
+	srcset="/p/interface-platform/index.zh-cn.assets/2_hu_8768b4cd8ddea8c.png 480w, /p/interface-platform/index.zh-cn.assets/2_hu_ec3aaa93d5be43ee.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="195"
+		data-flex-basis="468px"
+	
+></p>
+<ul>
+<li>权限管理
+<ul>
+<li>组织管理员可以通过用户账号邀请用户加入，共享组织内项目资源</li>
+<li>项目级默认权限为<code>MEMBER</code>，支持自定义分配权限，实现精细化管理</li>
+</ul>
+</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/3.png"
+	width="353"
+	height="396"
+	srcset="/p/interface-platform/index.zh-cn.assets/3_hu_44207a6434a88562.png 480w, /p/interface-platform/index.zh-cn.assets/3_hu_a717bae375c7822.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="89"
+		data-flex-basis="213px"
+	
+></p>
+<h3 id="多协议支持"><strong>多协议支持</strong>
+</h3><ul>
+<li>基础协议：HTTP/HTTPS(覆盖GET/POST/PUT/DELETE等方法)，支持请求头、请求体、变量替换配置</li>
+<li>扩展协议：通过插件方式支持WebSocket，并可基于此框架扩展更多协议(如gRPC等协议)</li>
+<li>变量管理：支持用例级别全局变量定义，步骤中通过<code>{{argument}}</code>引用，结合JSONPath提取响应数据动态更新变量</li>
+</ul>
+<h3 id="测试用例管理"><strong>测试用例</strong>管理
+</h3><h4 id="项目分组与用例类型"><strong>项目分组与用例类型</strong>
+</h4><ul>
+<li>按项目维度管理用例，支持简单用例(单接口测试)和流程用例(多接口串联，如 “登录→加购→下单”)</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/4.png"
+	width="1204"
+	height="580"
+	srcset="/p/interface-platform/index.zh-cn.assets/4_hu_df3d8cbd21cf3fb9.png 480w, /p/interface-platform/index.zh-cn.assets/4_hu_18463781ef83155.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="207"
+		data-flex-basis="498px"
+	
+></p>
+<ul>
+<li>可配置项
+<ul>
+<li>项目级：环境变量</li>
+<li>用例级：全局变量、超时时间、优先级</li>
+<li>步骤级：启用状态、失败是否继续运行、请求方法、请求路径、请求头、请求参数、请求体、变量提取、断言规则、前后置脚本</li>
+</ul>
+</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/5.png"
+	width="962"
+	height="333"
+	srcset="/p/interface-platform/index.zh-cn.assets/5_hu_d4691446049ad569.png 480w, /p/interface-platform/index.zh-cn.assets/5_hu_cdbd182613fbc11c.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="288"
+		data-flex-basis="693px"
+	
+></p>
+<blockquote>
+<p>支持状态码、响应时间、JSONPath等多类型断言，支持启用或者禁用断言配置</p></blockquote>
+<h4 id="测试用例执行与编辑的正确性">测试用例执行与编辑的正确性
+</h4><ul>
+<li>用例编辑时自动加锁，其他用户无法同时编辑或执行，避免并发修改导致的用例错乱</li>
+<li>锁状态实时同步(前端显示&quot;编辑中&quot;)</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/6.png"
+	width="421"
+	height="141"
+	srcset="/p/interface-platform/index.zh-cn.assets/6_hu_e68b5bf5913e1f9.png 480w, /p/interface-platform/index.zh-cn.assets/6_hu_9df7a0fb9a25144e.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="298"
+		data-flex-basis="716px"
+	
+></p>
+<h4 id="测试用例的独立性">测试用例的独立性
+</h4><ul>
+<li>效率：测试机主线程汇总结果，子线程并行执行测试用例，提升执行效率</li>
+<li>稳定性：
+<ul>
+<li>测试用例之间互不干扰，前置步骤报错会依据选项决定是否跳过后续步骤的执行，避免批量无效报错</li>
+<li>支持步骤级禁用</li>
+<li><img src="/p/interface-platform/index.zh-cn.assets/7.png"
+	width="276"
+	height="163"
+	srcset="/p/interface-platform/index.zh-cn.assets/7_hu_da3559096e90b665.png 480w, /p/interface-platform/index.zh-cn.assets/7_hu_51f1d426e5265fbe.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="169"
+		data-flex-basis="406px"
+	
+></li>
+</ul>
+</li>
+<li>灵活性：
+<ul>
+<li>用例增删改独立，无需关联其他用例</li>
+<li>支持用例复制扩展(复用前置步骤)，减少编写工作量</li>
+</ul>
+</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/8.png"
+	width="1180"
+	height="96"
+	srcset="/p/interface-platform/index.zh-cn.assets/8_hu_cd529f5a4bd3ec84.png 480w, /p/interface-platform/index.zh-cn.assets/8_hu_9a7a5acc757ffd62.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1229"
+		data-flex-basis="2950px"
+	
+></p>
+<h2 id="执行引擎">执行引擎
+</h2><h3 id="架构设计">架构设计
+</h3><p><img src="/p/interface-platform/index.zh-cn.assets/9.png"
+	width="661"
+	height="441"
+	srcset="/p/interface-platform/index.zh-cn.assets/9_hu_9e64d1420ddc2eb1.png 480w, /p/interface-platform/index.zh-cn.assets/9_hu_249050bcc5612d8a.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="149"
+		data-flex-basis="359px"
+	
+></p>
+<ul>
+<li>采用&quot;单一职责原则&quot;，添加新的协议测试需求代码改动小</li>
+<li>通过RabbitMQ实现异步执行，解耦执行模块和测试机，支持消息重试</li>
+<li>覆盖&quot;任务发起-执行-结果聚合&quot;的完整流程</li>
+</ul>
+<h4 id="模块职责">模块职责
+</h4><ul>
+<li>execution-engine：任务执行引擎，负责任务调度和分发</li>
+<li>测试机集群：实际执行测试用例的节点</li>
+<li>report-service：报告服务，负责测试结果收集和报告生成</li>
+<li>plugin-service：根据插件的开关来扩展微服务</li>
+</ul>
+<h4 id="设计思想">设计思想
+</h4><ul>
+<li>执行模块的缓存用于缓存正在执行的测试任务和节点负载，实现了基于节点负载的权重分配算法和节点故障的二次任务分发，避免测试机宕机导致的任务丢失</li>
+<li>任务队列命名统一为协议+nodeid，保证任务分发的正确性，也为后续扩展其他协议提供了统一标准</li>
+<li>健康队列用于测试机状态上报，保证执行模块可以正确监控节点状态</li>
+<li>报告模块的缓存用于缓存正在执行的测试任务和从测试机节点的执行反馈，待所有测试用例执行完成后存储到数据库，实现了分布式节点的报告聚合和测试结果的存储</li>
+<li>报告反馈队列用于报告聚合之后、报告发送之前，通知执行模块任务完成，执行模块删除缓存的测试任务</li>
+<li>测试平台操作主库进行测试用例的增删改，测试机读取从库获取测试用例
+<ul>
+<li>构造任务时发送每个测试用例的更新时间，通过测试用例的更新时间验证从库数据是否为最新版本，确保测试执行时数据准确性</li>
+<li>当测试用例处于执行状态，不允许编辑该测试用例，进一步保证测试执行时数据的准确性</li>
+</ul>
+</li>
+</ul>
+<h3 id="测试用例执行">测试用例执行
+</h3><ul>
+<li>触发方式：单点执行、批量执行、定时任务(一次性/Cron周期)</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/10.png"
+	width="293"
+	height="290"
+	srcset="/p/interface-platform/index.zh-cn.assets/10_hu_f8a626f36225358a.png 480w, /p/interface-platform/index.zh-cn.assets/10_hu_9d17e59f3dadf977.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="101"
+		data-flex-basis="242px"
+	
+></p>
+<ul>
+<li>定时任务：基于Quartz实现，支持动态扩展调度器(任务量增加时自动扩容)，确保并发任务稳定运行</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/11.png"
+	width="1232"
+	height="213"
+	srcset="/p/interface-platform/index.zh-cn.assets/11_hu_837e1f4b2aaa6615.png 480w, /p/interface-platform/index.zh-cn.assets/11_hu_d8af5146c8318a4d.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="578"
+		data-flex-basis="1388px"
+	
+></p>
+<p><img src="/p/interface-platform/index.zh-cn.assets/12.png"
+	width="1216"
+	height="24"
+	srcset="/p/interface-platform/index.zh-cn.assets/12_hu_f904d02c7fbffc03.png 480w, /p/interface-platform/index.zh-cn.assets/12_hu_bb680fb0e5dd25de.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="5066"
+		data-flex-basis="12160px"
+	
+></p>
+<h3 id="测试节点监控">测试节点监控
+</h3><p>动态获取节点在线情况</p>
+<p><img src="/p/interface-platform/index.zh-cn.assets/13.png"
+	width="281"
+	height="200"
+	srcset="/p/interface-platform/index.zh-cn.assets/13_hu_a9c674a37decdf3b.png 480w, /p/interface-platform/index.zh-cn.assets/13_hu_21dda44cb9919b9c.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="140"
+		data-flex-basis="337px"
+	
+></p>
+<h3 id="测试用例执行中不允许编辑">测试用例执行中不允许编辑
+</h3><p>测试机会校验任务的更新时间与数据库的是否一致，不一致代表从数据库数据还未更新</p>
+<p><img src="/p/interface-platform/index.zh-cn.assets/14.png"
+	width="544"
+	height="240"
+	srcset="/p/interface-platform/index.zh-cn.assets/14_hu_c839fd63cff8bc5e.png 480w, /p/interface-platform/index.zh-cn.assets/14_hu_6466aff5ed855a2e.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="226"
+		data-flex-basis="544px"
+	
+></p>
+<h2 id="通知模块"><strong>通知模块</strong>
+</h2><ul>
+<li>通知方式：支持邮件、飞书通知(可配置触发条件)，可多选发送</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/15.png"
+	width="598"
+	height="79"
+	srcset="/p/interface-platform/index.zh-cn.assets/15_hu_d9906ff74613b571.png 480w, /p/interface-platform/index.zh-cn.assets/15_hu_a2150eb783c5f059.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="756"
+		data-flex-basis="1816px"
+	
+></p>
+<ul>
+<li>报告形式：默认文本报告，开启Allure插件后生成可视化报告</li>
+<li>策略保障：通过缓存通知配置+结果校验，确保通知不重复、不遗漏</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/16.png"
+	width="659"
+	height="418"
+	srcset="/p/interface-platform/index.zh-cn.assets/16_hu_11423edaa8669fab.png 480w, /p/interface-platform/index.zh-cn.assets/16_hu_79ff8f784365e3ba.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="157"
+		data-flex-basis="378px"
+	
+></p>
+<p><img src="/p/interface-platform/index.zh-cn.assets/17.png"
+	width="398"
+	height="417"
+	srcset="/p/interface-platform/index.zh-cn.assets/17_hu_10fc890dc9eb3119.png 480w, /p/interface-platform/index.zh-cn.assets/17_hu_52e97b513f55a4d4.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="95"
+		data-flex-basis="229px"
+	
+></p>
+<h2 id="插件生态">插件生态
+</h2><p>采用插件化设计扩展平台能力，支持按需启用</p>
+<ul>
+<li>Allure报告：生成可视化报告替代纯文本报告</li>
+<li>Pytest用例导出：将平台用例转换为可直接执行的Pytest脚本(含yaml数据文件、工具类)</li>
+</ul>
+<p><img src="/p/interface-platform/index.zh-cn.assets/18.png"
+	width="540"
+	height="138"
+	srcset="/p/interface-platform/index.zh-cn.assets/18_hu_81650b46e8b634eb.png 480w, /p/interface-platform/index.zh-cn.assets/18_hu_3a1233ac4150f5a5.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="391"
+		data-flex-basis="939px"
+	
+></p>
+<ul>
+<li>WebSocket测试：支持WebSocket测试，复用现有执行/通知体系，无需修改核心模块</li>
+</ul>
+<h2 id="使用接口测试平台测试">使用接口测试平台测试
+</h2><p>为验证平台有效性，基于 Flask 开发简易商城服务（含登录、商品、购物车、订单功能），设计 55 个测试用例（含正常流程 + 异常场景，如无效 JSON、错误请求方法等），通过平台执行验证</p>
+<h3 id="登录">登录
+</h3><p><img src="/p/interface-platform/index.zh-cn.assets/19.png"
+	width="1280"
+	height="666"
+	srcset="/p/interface-platform/index.zh-cn.assets/19_hu_4f8b8030507db1f8.png 480w, /p/interface-platform/index.zh-cn.assets/19_hu_478f17eb95f25c9e.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="192"
+		data-flex-basis="461px"
+	
+></p>
+<h3 id="注册">注册
+</h3><p><img src="/p/interface-platform/index.zh-cn.assets/20.png"
+	width="1280"
+	height="575"
+	srcset="/p/interface-platform/index.zh-cn.assets/20_hu_c673eeb8f620b04e.png 480w, /p/interface-platform/index.zh-cn.assets/20_hu_cf6ea79d1997b892.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="222"
+		data-flex-basis="534px"
+	
+></p>
+<h3 id="商品搜索">商品搜索
+</h3><p><img src="/p/interface-platform/index.zh-cn.assets/21.png"
+	width="1280"
+	height="484"
+	srcset="/p/interface-platform/index.zh-cn.assets/21_hu_64ffd3e4cd6fa761.png 480w, /p/interface-platform/index.zh-cn.assets/21_hu_da3d4602a0acd43c.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="264"
+		data-flex-basis="634px"
+	
+></p>
+<h3 id="购物车">购物车
+</h3><h4 id="添加单个商品">添加单个商品
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/22.png"
+	width="1280"
+	height="484"
+	srcset="/p/interface-platform/index.zh-cn.assets/22_hu_e3299b97357f980c.png 480w, /p/interface-platform/index.zh-cn.assets/22_hu_4c206465b70ca296.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="264"
+		data-flex-basis="634px"
+	
+></p>
+<h4 id="添加多个商品">添加多个商品
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/23.png"
+	width="1280"
+	height="486"
+	srcset="/p/interface-platform/index.zh-cn.assets/23_hu_9616980f7a996058.png 480w, /p/interface-platform/index.zh-cn.assets/23_hu_b30d0aaf85587200.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="263"
+		data-flex-basis="632px"
+	
+></p>
+<h4 id="分批次添加商品补充">分批次添加商品——补充
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/24.png"
+	width="1280"
+	height="369"
+	srcset="/p/interface-platform/index.zh-cn.assets/24_hu_165007111fdfadb3.png 480w, /p/interface-platform/index.zh-cn.assets/24_hu_7a65d8c42145104a.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="346"
+		data-flex-basis="832px"
+	
+></p>
+<h3 id="订单相关">订单相关
+</h3><h4 id="创建订单">创建订单
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/25.png"
+	width="1280"
+	height="302"
+	srcset="/p/interface-platform/index.zh-cn.assets/25_hu_8b40c4600fdf139f.png 480w, /p/interface-platform/index.zh-cn.assets/25_hu_4e7f02a05e8c5a5a.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="423"
+		data-flex-basis="1017px"
+	
+></p>
+<h4 id="查询余额">查询余额
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/26.png"
+	width="1739"
+	height="165"
+	srcset="/p/interface-platform/index.zh-cn.assets/26_hu_89ee326bf96851f8.png 480w, /p/interface-platform/index.zh-cn.assets/26_hu_289ac52dadff0826.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1053"
+		data-flex-basis="2529px"
+	
+></p>
+<h4 id="订单查询">订单查询
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/27.png"
+	width="1280"
+	height="488"
+	srcset="/p/interface-platform/index.zh-cn.assets/27_hu_567788412524041f.png 480w, /p/interface-platform/index.zh-cn.assets/27_hu_fc16ea4c4dd9831b.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="262"
+		data-flex-basis="629px"
+	
+></p>
+<h4 id="订单支付">订单支付
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/28.png"
+	width="1280"
+	height="550"
+	srcset="/p/interface-platform/index.zh-cn.assets/28_hu_d5817eb9913ddd65.png 480w, /p/interface-platform/index.zh-cn.assets/28_hu_16bfc757b932f5b0.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="232"
+		data-flex-basis="558px"
+	
+></p>
+<h4 id="订单取消">订单取消
+</h4><p><img src="/p/interface-platform/index.zh-cn.assets/29.png"
+	width="1280"
+	height="368"
+	srcset="/p/interface-platform/index.zh-cn.assets/29_hu_7496d904c690bf23.png 480w, /p/interface-platform/index.zh-cn.assets/29_hu_34352b6f5856e3b1.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="347"
+		data-flex-basis="834px"
+	
+></p>
+<h3 id="测试">测试
+</h3><p>上述测试用例+异常测试用例(访问不存在的方法、错误请求方法、无效的JSON格式等)录入至接口测试平台，共计55个</p>
+<p><img src="/p/interface-platform/index.zh-cn.assets/30.png"
+	width="1280"
+	height="518"
+	srcset="/p/interface-platform/index.zh-cn.assets/30_hu_26c6aa80428af71.png 480w, /p/interface-platform/index.zh-cn.assets/30_hu_91c80bb5cd72062a.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="247"
+		data-flex-basis="593px"
+	
+></p>
+<p>测试完成</p>
+<p><img src="/p/interface-platform/index.zh-cn.assets/31.png"
+	width="1221"
+	height="1243"
+	srcset="/p/interface-platform/index.zh-cn.assets/31_hu_65faeb50ed3b35ea.png 480w, /p/interface-platform/index.zh-cn.assets/31_hu_d3153ec533b8fa4c.png 1024w"
+	loading="lazy"
+	
+		alt="1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="98"
+		data-flex-basis="235px"
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 Example Person
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
